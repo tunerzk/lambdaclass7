@@ -1,2 +1,9 @@
-variable "region" { default = "us-west-2" }
-variable "project" { default = "lab1" }
+variable "region" {
+  type    = string
+  default = "us-west-2"
+}
+
+variable "project" {
+  type    = string
+  default = "lab1"
+}
