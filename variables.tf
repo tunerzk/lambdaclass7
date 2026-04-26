@@ -5,7 +5,7 @@ variable "region" {
 
 variable "project" {
   type    = string
-  default = "lab1"
+  default = "imagesbucks3"
 }
 
 variable "db_username" {

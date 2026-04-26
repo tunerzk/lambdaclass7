@@ -1,4 +1,4 @@
-output "bucket" { value = aws_s3_bucket.images.bucket }
+output "bucket" { value = aws_s3_bucket.imagesbucks3 }
 
 output "db_endpoint" {
   value = aws_rds_cluster.orders_cluster.endpoint
