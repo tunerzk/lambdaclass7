@@ -35,17 +35,27 @@ jobs:
 
       - name: Terraform Validate (Lab 1)
         run: terraform validate
-
+        
       - name: Terraform Plan (Lab 1)
-  env:
-     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-     DB_USERNAME: ${{ secrets.DB_USERNAME }}
-     DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
- run: terraform plan -input=false \
-      -var "db_username=${DB_USERNAME}" \
-      -var "db_password=${DB_PASSWORD}"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: terraform plan -input=false \
+         -var "db_username=${DB_USERNAME}" \
+         -var "db_password=${DB_PASSWORD}"
 
+      - name: Terraform Apply (Lab 1)
+     env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: terraform apply -auto-approve \
+         -var "db_username=${DB_USERNAME}" \
+         -var "db_password=${DB_PASSWORD}"
+ 
 
      # - name: Terraform Init (Lab 2)
      #   working-directory: ./lab2_order_system
