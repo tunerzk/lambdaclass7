@@ -45,7 +45,7 @@ resource "aws_security_group" "aurora_sg" {
 
 #aurora subnet group for cluster#############################
 resource "aws_rds_cluster_subnet_group" "aurora_subnets" {
-  name       = "${local.project}-subnet-group"
+  name = "${local.project}-subnet-group"
   subnet_ids = [
     aws_subnet.private_a.id,
     aws_subnet.private_b.id
@@ -60,11 +60,11 @@ resource "aws_rds_cluster" "orders_cluster" {
   engine             = "aurora-mysql"
   engine_mode        = "provisioned"
 
-  database_name      = "orders"
-  master_username    = var.db_username
-  master_password    = var.db_password
+  database_name   = "orders"
+  master_username = var.db_username
+  master_password = var.db_password
 
-  db_subnet_group_name = aws_rds_cluster_subnet_group.aurora_subnets.name
+  db_subnet_group_name   = aws_rds_cluster_subnet_group.aurora_subnets.name
   vpc_security_group_ids = [aws_security_group.aurora_sg.id]
 
   serverlessv2_scaling_configuration {
@@ -78,10 +78,10 @@ resource "aws_rds_cluster" "orders_cluster" {
 
 ######aurora cluster instance for connectivity testing################
 resource "aws_rds_cluster_instance" "orders_instance" {
-  identifier         = "${local.project}-instance"
-  cluster_identifier = aws_rds_cluster.orders_cluster.id
-  instance_class     = "db.serverless"
-  engine             = aws_rds_cluster.orders_cluster.engine
+  identifier          = "${local.project}-instance"
+  cluster_identifier  = aws_rds_cluster.orders_cluster.id
+  instance_class      = "db.serverless"
+  engine              = aws_rds_cluster.orders_cluster.engine
   publicly_accessible = false
-  tags               = local.tags
+  tags                = local.tags
 }

@@ -26,14 +26,14 @@ resource "aws_eventbridge_rule" "order_paid_rule" {
 ############eventbridge targets##############
 # Target for OrderCreated → OrderCreatedHandler Lambda
 resource "aws_eventbridge_target" "order_created_target" {
-  rule      = aws_eventbridge_rule.order_created_rule.name
+  rule           = aws_eventbridge_rule.order_created_rule.name
   event_bus_name = aws_eventbridge_bus.orders_bus.name
-  arn       = aws_lambda_function.order_created_handler.arn
+  arn            = aws_lambda_function.order_created_handler.arn
 }
 
 # Target for OrderPaid → (later) PaymentProcessor or Notification Lambda
 resource "aws_eventbridge_target" "order_paid_target" {
-  rule      = aws_eventbridge_rule.order_paid_rule.name
+  rule           = aws_eventbridge_rule.order_paid_rule.name
   event_bus_name = aws_eventbridge_bus.orders_bus.name
-  arn       = aws_lambda_function.payment_processor.arn
+  arn            = aws_lambda_function.payment_processor.arn
 }

@@ -15,8 +15,8 @@ resource "aws_sqs_queue" "payment_queue" {
 
 #######connecting SQS to Lambda#######
 resource "aws_lambda_event_source_mapping" "payment_queue_trigger" {
-  event_source_arn  = aws_sqs_queue.payment_queue.arn
-  function_name     = aws_lambda_function.payment_processor.arn
-  batch_size        = 1
-  enabled           = true
+  event_source_arn = aws_sqs_queue.payment_queue.arn
+  function_name    = aws_lambda_function.payment_processor.arn
+  batch_size       = 1
+  enabled          = true
 }
