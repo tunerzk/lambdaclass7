@@ -22,7 +22,7 @@ resource "aws_lambda_permission" "allow_eventbridge_invoke_order_created" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.order_created_handler.function_name
   principal     = "events.amazonaws.com"
-  source_arn    = aws_eventbridge_rule.order_created_rule.arn
+  source_arn    = aws_cloudwatch_event_rule.order_created_rule.arn
 }
 
 resource "aws_lambda_permission" "allow_eventbridge_invoke_order_paid" {
@@ -30,7 +30,7 @@ resource "aws_lambda_permission" "allow_eventbridge_invoke_order_paid" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.payment_processor.function_name
   principal     = "events.amazonaws.com"
-  source_arn    = aws_eventbridge_rule.order_paid_rule.arn
+  source_arn    = aws_cloudwatch_event_rule.order_paid_rule.arn
 }
 
 ##sqs permissions for Lambda#########
@@ -72,7 +72,7 @@ resource "aws_iam_policy" "lambda_eventbridge_put" {
     Statement = [{
       Effect   = "Allow"
       Action   = "events:PutEvents"
-      Resource = aws_eventbridge_bus.orders_bus.arn
+      Resource = aws_cloudwatch_event_bus.orders_bus.arn
     }]
   })
 }

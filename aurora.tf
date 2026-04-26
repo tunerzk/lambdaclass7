@@ -44,7 +44,7 @@ resource "aws_security_group" "aurora_sg" {
 }
 
 #aurora subnet group for cluster#############################
-resource "aws_rds_cluster_subnet_group" "aurora_subnets" {
+resource "aws_db_subnet_group" "aurora_subnets" {
   name = "${local.project}-subnet-group"
   subnet_ids = [
     aws_subnet.private_a.id,
@@ -64,7 +64,7 @@ resource "aws_rds_cluster" "orders_cluster" {
   master_username = var.db_username
   master_password = var.db_password
 
-  db_subnet_group_name   = aws_rds_cluster_subnet_group.aurora_subnets.name
+  db_subnet_group_name   = aws_db_subnet_group.aurora_subnets.name
   vpc_security_group_ids = [aws_security_group.aurora_sg.id]
 
   serverlessv2_scaling_configuration {

@@ -24,7 +24,7 @@ resource "aws_lambda_function" "create_order" {
       DB_HOST        = aws_rds_cluster.orders_cluster.endpoint
       DB_USER        = var.db_username
       DB_PASSWORD    = var.db_password
-      EVENT_BUS_NAME = aws_eventbridge_bus.orders_bus.name
+      EVENT_BUS_NAME = aws_cloudwatch_event_bus.orders_bus.name
     }
   }
 }
@@ -70,7 +70,7 @@ resource "aws_lambda_function" "payment_processor" {
       DB_HOST        = aws_rds_cluster.orders_cluster.endpoint
       DB_USER        = var.db_username
       DB_PASSWORD    = var.db_password
-      EVENT_BUS_NAME = aws_eventbridge_bus.orders_bus.name
+      EVENT_BUS_NAME = aws_cloudwatch_event_bus.orders_bus.name
       SNS_TOPIC_ARN  = aws_sns_topic.order_notifications.arn
     }
   }
