@@ -47,7 +47,7 @@ resource "aws_security_group_rule" "aurora_allow_lambda" {
 }
 
 
-  
+
 
 
 #aurora subnet group for cluster#############################
@@ -72,7 +72,7 @@ resource "aws_rds_cluster" "orders_cluster" {
   master_password = var.db_password
 
   db_subnet_group_name   = aws_db_subnet_group.aurora_subnets.name
-vpc_security_group_ids = [aws_security_group.aurora_sg.id]
+  vpc_security_group_ids = [aws_security_group.aurora_sg.id]
 
   serverlessv2_scaling_configuration {
     min_capacity = 0.5
