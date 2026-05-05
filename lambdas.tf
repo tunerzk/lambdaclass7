@@ -31,6 +31,8 @@ resource "aws_lambda_function" "create_order" {
   filename         = "build/lambda_create_order.zip"
   source_code_hash = filebase64sha256("build/lambda_create_order.zip")
 
+  
+
   vpc_config {
     subnet_ids         = [aws_subnet.private_a.id, aws_subnet.private_b.id]
     security_group_ids = [aws_security_group.lambda_sg.id]
@@ -59,6 +61,8 @@ resource "aws_lambda_function" "order_created_handler" {
   filename         = "build/lambda_order_created_handler.zip"
   source_code_hash = filebase64sha256("build/lambda_order_created_handler.zip")
 
+  
+
   vpc_config {
     subnet_ids         = [aws_subnet.private_a.id, aws_subnet.private_b.id]
     security_group_ids = [aws_security_group.lambda_sg.id]
@@ -85,7 +89,9 @@ resource "aws_lambda_function" "payment_processor" {
   runtime       = "nodejs18.x"
 
   filename         = "build/lambda_payment_processor.zip"
-  source_code_hash = filebase64sha256("build/lambda_payment_processor.zip")
+ source_code_hash = filebase64sha256("build/lambda_payment_processor.zip")
+ 
+  
 
   vpc_config {
     subnet_ids         = [aws_subnet.private_a.id, aws_subnet.private_b.id]
